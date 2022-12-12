@@ -1,0 +1,29 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.52.237:3306/socks?useUnicode=true&characterEncoding=UTF-8
+    username: online
+    password: Ustc2020@online
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+    prefix: classpath:/templates
+    suffix: .html
+    servlet:
+      content-type: text/html
+
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: halowxpush.wx.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazyLoadingEnabled: true
+    multipleResultSetsEnabled: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

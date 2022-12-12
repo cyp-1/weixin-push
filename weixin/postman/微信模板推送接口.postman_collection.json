@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "026340c6-8b29-4a13-af5f-f0091da7e3eb",
+		"name": "微信模板推送接口",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5467267"
+	},
+	"item": [
+		{
+			"name": "获取Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx884f074f88d6dee1&secret=d877844df27c2c184fbfca55e34138f3",
+					"protocol": "https",
+					"host": [
+						"api",
+						"weixin",
+						"qq",
+						"com"
+					],
+					"path": [
+						"cgi-bin",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credential"
+						},
+						{
+							"key": "appid",
+							"value": "wx884f074f88d6dee1"
+						},
+						{
+							"key": "secret",
+							"value": "d877844df27c2c184fbfca55e34138f3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查询微信模板列表",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.weixin.qq.com/cgi-bin/template/get_all_private_template?access_token=60_degMPGrSknJOn-yFVQWJYh6I-dxZ9wagGU-_l7V-hhPgxGpE_OYaHbvsBjO5G9CUNduq5PNbHHkNwLdaW8158od2R39KP5DAHZX2qkfvQnf7LO3WpXtkS26eqsMrX_lWlz_F2K7maHlfuOc0MODcABAUWL",
+					"protocol": "https",
+					"host": [
+						"api",
+						"weixin",
+						"qq",
+						"com"
+					],
+					"path": [
+						"cgi-bin",
+						"template",
+						"get_all_private_template"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "60_degMPGrSknJOn-yFVQWJYh6I-dxZ9wagGU-_l7V-hhPgxGpE_OYaHbvsBjO5G9CUNduq5PNbHHkNwLdaW8158od2R39KP5DAHZX2qkfvQnf7LO3WpXtkS26eqsMrX_lWlz_F2K7maHlfuOc0MODcABAUWL"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "删除微信模板",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {  \r\n     \"template_id\" : \"MjpNonz8h0Iud7-42trPXBeWFoPGYyq6wuo-PRrXrv4\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.weixin.qq.com/cgi-bin/template/del_private_template?access_token=60_degMPGrSknJOn-yFVQWJYh6I-dxZ9wagGU-_l7V-hhPgxGpE_OYaHbvsBjO5G9CUNduq5PNbHHkNwLdaW8158od2R39KP5DAHZX2qkfvQnf7LO3WpXtkS26eqsMrX_lWlz_F2K7maHlfuOc0MODcABAUWL",
+					"protocol": "https",
+					"host": [
+						"api",
+						"weixin",
+						"qq",
+						"com"
+					],
+					"path": [
+						"cgi-bin",
+						"template",
+						"del_private_template"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "60_degMPGrSknJOn-yFVQWJYh6I-dxZ9wagGU-_l7V-hhPgxGpE_OYaHbvsBjO5G9CUNduq5PNbHHkNwLdaW8158od2R39KP5DAHZX2qkfvQnf7LO3WpXtkS26eqsMrX_lWlz_F2K7maHlfuOc0MODcABAUWL"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "推送模板",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n           \"touser\":\"oegqO6Rbs17gABy5trtotbJK82Q0\",\r\n           \"template_id\":\"OlLU_XCVx1UdyEN_WH1gggT9TLPuP9CpywvNH5q_y60\",\r\n\r\n           \"client_msg_id\":\"MSG_000006\",\r\n           \"data\":{\r\n                   \"first\": {\r\n                       \"value\":\"恭喜你购买成功！\",\r\n                       \"color\":\"#173177\"\r\n                   }\r\n           }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=60_degMPGrSknJOn-yFVQWJYh6I-dxZ9wagGU-_l7V-hhPgxGpE_OYaHbvsBjO5G9CUNduq5PNbHHkNwLdaW8158od2R39KP5DAHZX2qkfvQnf7LO3WpXtkS26eqsMrX_lWlz_F2K7maHlfuOc0MODcABAUWL",
+					"protocol": "https",
+					"host": [
+						"api",
+						"weixin",
+						"qq",
+						"com"
+					],
+					"path": [
+						"cgi-bin",
+						"message",
+						"template",
+						"send"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "60_degMPGrSknJOn-yFVQWJYh6I-dxZ9wagGU-_l7V-hhPgxGpE_OYaHbvsBjO5G9CUNduq5PNbHHkNwLdaW8158od2R39KP5DAHZX2qkfvQnf7LO3WpXtkS26eqsMrX_lWlz_F2K7maHlfuOc0MODcABAUWL"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
