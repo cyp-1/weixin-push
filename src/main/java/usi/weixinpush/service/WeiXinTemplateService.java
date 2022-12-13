@@ -66,7 +66,7 @@ public class WeiXinTemplateService {
         // 距离我的生日
         try {
 //            data.put("a",getJSON(CommonnUtil.calculatePastDays("2022-08-16"),"#A3C6FC"));
-//            data.put("b",getJSON(CommonnUtil.calculatePastDays("2022-03-01"),"#A3C6FC"));
+            data.put("withU",getJSON(CommonnUtil.calculatePastDays("2021-11-20"),"#A3C6FC"));
             data.put("sheBir",getJSON(CommonnUtil.calculateBirth("2000-01-22"),"#FB2413"));
             data.put("myBir",getJSON(CommonnUtil.calculateBirth("1998-11-15"),"#DEFDAB "));
         } catch (ParseException e) {
@@ -74,6 +74,8 @@ public class WeiXinTemplateService {
         }
         // 土味情话
         data.put("tuQ",getJSON(getEarthyLoveStory3(),"#FDE050"));
+        // 笑话
+        data.put("joK",getJSON(getJokes(),"#44b41f"));
         // 获取每日天气
         try {
             JSONObject weatherJson = getEveryWeather();
@@ -97,6 +99,22 @@ public class WeiXinTemplateService {
         String res = HttpClientUtil.doPost(accessTokenUrl,json);
         JSONObject jsonRes = JSON.parseObject(res);
         log.info("获取模板列表 返回数据：[{}]",jsonRes.toString());
+    }
+
+    /**
+     * 描述:  获取笑话
+     */
+    public static String getJokes(){
+        String tu_url = "https://api.vvhan.com/api/joke?type=json";
+        String res = HttpClientUtil.doGet(tu_url,"UTF-8");
+        String onlyJok = res.replaceAll(".*\"joke\":\"(.*)\".*","$1");
+//        log.info("获取笑话 返回数据：[{}]",onlyJok);
+        return onlyJok;
+    }
+
+    public static void main(String[] args) {
+        getJokes();
+        getEarthyLoveStory3();
     }
 
     /**
@@ -136,7 +154,7 @@ public class WeiXinTemplateService {
     public static String getEarthyLoveStory3(){
         String tu_url = "https://api.vvhan.com/api/love";
         String res = HttpClientUtil.doGet(tu_url,"UTF-8");
-        log.info("获取土味情话 返回数据：[{}]",res);
+//        log.info("获取土味情话 返回数据：[{}]",res);
         return res;
     }
 
@@ -164,7 +182,4 @@ public class WeiXinTemplateService {
         return data;
     }
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        pushWeiXinTemplate();
-    }
 }

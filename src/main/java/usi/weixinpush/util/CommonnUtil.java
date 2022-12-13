@@ -8,6 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
+import static usi.weixinpush.util.CalendarUtil.calculateLeave;
+import static usi.weixinpush.util.CalendarUtil.solarToLunar;
+
+
 public class CommonnUtil {
 
     /**
@@ -52,7 +56,7 @@ public class CommonnUtil {
     }
 
     /**
-     * 描述: 生日还有多少天
+     * 描述: 生日还有多少天  阳历
      * @Author wangxianlin
      * @Date 22:21 2022/8/20
      * @param: day
@@ -72,8 +76,27 @@ public class CommonnUtil {
         return String.valueOf(interval/1000/60/60/24);
     }
 
-    public static void main(String[] args) throws ParseException {
-        System.out.println(calculateBirth(("2021-12-04 00:00:00")));
+    /**
+     * 描述: 生日还有多少天  阴历
+     * @Author wangxianlin
+     * @Date 22:21 2022/8/20
+     * @param: day
+     * @Return java.lang.String
+     */
+    public static String calculateLunarBirth(String day) throws Exception {
+        day = solarToLunar(day.replaceAll("-", ""));
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        day = day.replaceFirst("\\d{4}",year+"");
+        int leave = calculateLeave(CalendarUtil.lunarToSolar(day,false));
+        if(leave>366){
+            day = day.replaceFirst("\\d{4}",year-1+"");
+            leave = calculateLeave(CalendarUtil.lunarToSolar(day,false));
+        }
+        return leave%365+"";
+        // ToDO 需判断本年是不是闰年来余365或366
+    }
+    public static void main(String[] args) throws Exception {
+        System.out.println(calculateLunarBirth("2000-01-16"));
     }
 
     /**
