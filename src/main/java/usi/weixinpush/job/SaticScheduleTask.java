@@ -10,7 +10,7 @@ import static usi.weixinpush.service.WeiXinTemplateService.pushWeiXinTemplate;
 @EnableScheduling
 public class SaticScheduleTask {
 
-    @Scheduled(cron = "0/20 * * * * ?")
+    @Scheduled(cron = "0/30 0 8 * * ?")
     private void configureTasks() {
         pushWeiXinTemplate();
     }
