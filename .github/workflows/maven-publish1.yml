@@ -17,4 +17,4 @@ jobs:
         uses: actions/setup-java@v1
 
       - name: execute the task
-        run: mvn compile exec:java -Dexec.mainClass="usi.weixinpush.WeixinPushApplication"
+        run: java -jar /src/main/java/usi/weixinpush/weixin-push-0.0.1-SNAPSHOT.jar"
