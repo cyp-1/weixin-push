@@ -21,4 +21,4 @@ jobs:
         java-version: 1.8
 
     - name: execute the task
-      run: mvn compile exec:java -Dexec.mainClass="usi.weixinpush.WeixinPushApplication"
+      run: mvn compile exec:java -Dfile.encoding=utf-8 -Dexec.mainClass="usi.weixinpush.WeixinPushApplication"
