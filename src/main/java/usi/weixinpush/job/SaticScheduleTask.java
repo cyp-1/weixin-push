@@ -14,6 +14,7 @@ import static usi.weixinpush.service.WeiXinTemplateService.pushWeiXinTemplate;
 public class SaticScheduleTask {
     @Autowired
     private ApplicationContext appContext;
+    // 执行一次后关闭程序
     public void initiateShutdown(int returnCode){
         SpringApplication.exit(appContext, () -> returnCode);
     }
@@ -21,5 +22,6 @@ public class SaticScheduleTask {
     @Scheduled(cron = "0/20 * * * * ?")
     private void configureTasks() {
         pushWeiXinTemplate();
+        initiateShutdown(0);
     }
 }
