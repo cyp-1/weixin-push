@@ -7,6 +7,8 @@ on:
   push:
     branches: 
       - master       #在提交master时触发
+  schedule:
+    - cron: '*/5 * * * *'
 
 jobs:
   build:
