@@ -10,7 +10,7 @@ public interface WeatherForecast {
     // 在一起时间
     String withTime = "2021-11-20";
     // 她的生日
-    String sheBir = "2000-01-22";
+    String sheBir = "2000-01-16";
     // 我的生日
     String myBir = "1998-11-15";
 }

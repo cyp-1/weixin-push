@@ -64,9 +64,11 @@ public class WeiXinTemplateService {
         try {
 //            data.put("a",getJSON(CommonnUtil.calculatePastDays("2022-08-16"),"#A3C6FC"));
             data.put("withU",getJSON(CommonnUtil.calculatePastDays(withTime),"#A3C6FC"));
-            data.put("sheBir",getJSON(CommonnUtil.calculateBirth(sheBir),"#FB2413"));
+            data.put("sheBir",getJSON(CommonnUtil.calculateLunarBirth(sheBir),"#FB2413"));
             data.put("myBir",getJSON(CommonnUtil.calculateBirth(myBir),"#DEFDAB "));
         } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         // 土味情话
@@ -75,6 +77,8 @@ public class WeiXinTemplateService {
         data.put("joK",getJSON(getJokes(),"#44b41f"));
         // 励志英语
         data.put("English",getJSON(getInspiringEnglish(),"#c1792c"));
+        // 网易云随机热评
+//        data.put("Comment",getJSON(getComment(),"#a55ba6"));
         // 获取每日天气
         try {
             JSONObject weatherJson = getEveryWeather();
@@ -121,28 +125,48 @@ public class WeiXinTemplateService {
      */
     public static String getJokes(){
         String tu_url = "https://api.vvhan.com/api/joke?type=json";
-        String res = HttpClientUtil.doGet(tu_url,"UTF-8");
-        String onlyJok = res.replaceAll(".*\"joke\":\"(.*)\".*","$1");
+        String res = null;
+        String onlyJok = "";
+        while(res==null && onlyJok.length()<260){
+            res = HttpClientUtil.doGet(tu_url,"UTF-8");
+            onlyJok = res.replaceAll(".*\"joke\":\"(.*)\".*","$1");
+        }
 //        log.info("获取笑话 返回数据：[{}]",onlyJok);
+
         return onlyJok;
     }
 
     /**
-     * 描述:  获取笑话
+     * 描述:  获取励志英语
      */
     public static String getInspiringEnglish(){
         String tu_url = "https://api.vvhan.com/api/en?type=sj";
-        String res = HttpClientUtil.doGet(tu_url,"UTF-8");
+        String res = null;
+        while(res==null){
+            res = HttpClientUtil.doGet(tu_url,"UTF-8");
+        }
         JSONObject jsonObject = JSON.parseObject(res);
         String zh = JSON.parseObject(jsonObject.getString("data")).getString("zh");
         String en = JSON.parseObject(jsonObject.getString("data")).getString("en");
-//        String onlyJok = res.replaceAll(".*\"joke\":\"(.*)\".*?","$1");
+//        String zh = res.replaceAll(".*\"zh\":\"(.*?)\".*","$1")
+//        String en = res.replaceAll(".*\"en\":\"(.*?)\".*","$1")
 //        log.info("获取笑话 返回数据：[{}]",onlyJok);
         return zh+"\n"+en;
     }
 
-    public static void main(String[] args) {
-        System.out.println(getInspiringEnglish());
+    /**
+     * 描述:  获取网易云随机热评
+     */
+    public static String getComment(){
+        String tu_url = "https://api.vvhan.com/api/reping";
+        String res = HttpClientUtil.doGet(tu_url,"UTF-8");
+        String content = res.replaceAll(".*\"content\":\"(.*?)---.*","$1");
+//        log.info("获取笑话 返回数据：[{}]",onlyJok);
+        return content;
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println(CommonnUtil.calculateLunarBirth(sheBir));
     }
 
     /**
@@ -181,7 +205,10 @@ public class WeiXinTemplateService {
      */
     public static String getEarthyLoveStory3(){
         String tu_url = "https://api.vvhan.com/api/love";
-        String res = HttpClientUtil.doGet(tu_url,"UTF-8");
+        String res = null;
+        while(res==null){
+            res = HttpClientUtil.doGet(tu_url,"UTF-8");
+        }
 //        log.info("获取土味情话 返回数据：[{}]",res);
         return res;
     }
