@@ -6,7 +6,7 @@ name: Maven Package
 on:
   push:
     branches: 
-      - master       #在提交master时触发 .
+      - master       #在提交master时触发
   schedule:
     - cron: '0 23 * * *'
 
