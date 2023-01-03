@@ -19,7 +19,7 @@ public class WeiXinTemplateService {
     private static Logger log = LoggerFactory.getLogger(WeiXinTemplateService.class);
 
     /** 获取TOKEN URL */
-    public static final String GET_ACCESS_TOKEN_URL = " https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential";
+    public static final String GET_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential";
     /** 推送模板 URL */
     public static final String PUSH_TEMPLATE_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=";
     /** 推送模板 URL */
@@ -131,7 +131,7 @@ public class WeiXinTemplateService {
             res = HttpClientUtil.doGet(tu_url,"UTF-8");
             onlyJok = res.replaceAll(".*\"joke\":\"(.*)\".*","$1");
         }
-//        log.info("获取笑话 返回数据：[{}]",onlyJok);
+        log.info("获取笑话 返回数据：[{}]",onlyJok);
 
         return onlyJok;
     }

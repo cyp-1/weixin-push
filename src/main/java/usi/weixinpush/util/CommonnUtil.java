@@ -86,17 +86,21 @@ public class CommonnUtil {
     public static String calculateLunarBirth(String day) throws Exception {
         day = solarToLunar(day.replaceAll("-", ""));
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        day = day.replaceFirst("\\d{4}",year+"");
-        int leave = calculateLeave(CalendarUtil.lunarToSolar(day,false));
-        if(leave>366){
-            day = day.replaceFirst("\\d{4}",year-1+"");
-            leave = calculateLeave(CalendarUtil.lunarToSolar(day,false));
+        String day1 = day.replaceFirst("\\d{4}",year+"");
+        int leave1 = calculateLeave(CalendarUtil.lunarToSolar(day1,false));
+
+        String day2 = day.replaceFirst("\\d{4}",year-1+"");
+        int leave2 = calculateLeave(CalendarUtil.lunarToSolar(day2,false));
+        if(leave1<0){
+            leave1 = 999;
         }
-        return leave%365+"";
-        // ToDO 需判断本年是不是闰年来余365或366
+        if(leave2<0){
+            leave2 = 999;
+        }
+        return Math.min(leave1,leave2)+"";
     }
     public static void main(String[] args) throws Exception {
-        System.out.println(calculateLunarBirth("2000-01-16"));
+        System.out.println(calculateLunarBirth("2020-01-03"));
     }
 
     /**

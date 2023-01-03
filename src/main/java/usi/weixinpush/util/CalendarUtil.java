@@ -334,9 +334,10 @@ public class CalendarUtil {
         offset += temp;
         lunarMonth = i;
         lunarDay = offset;
-
+        LocalDateTime time = LocalDateTime.of(lunarYear, lunarMonth, lunarDay, 0, 0, 0);
 //        return "阴历："+lunarYear+"年"+(leapMonthFlag&(lunarMonth==leapMonth)?"闰":"")+lunarMonth+"月"+lunarDay+"日";
-        return new StringBuilder().append(lunarYear).append("-").append(lunarMonth).append("-").append(lunarDay).toString();
+//        return new StringBuilder().append(lunarYear).append("-").append(lunarMonth).append("-").append(lunarDay).toString();
+        return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public static void main(String[] args) throws Exception {
@@ -352,6 +353,6 @@ public class CalendarUtil {
         LocalDateTime timeDate = LocalDateTime.parse(day, formater);
 //        now = LocalDateTime.parse("2022-01-01 00:00:00", formater);
         long interval = Duration.between(now,timeDate).toMillis();
-        return (int)(interval/1000/60/60/24);
+        return (int)((interval/1000/60/60+8)/24);
     }
 }
