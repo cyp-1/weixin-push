@@ -58,6 +58,7 @@ public class HttpClientUtil {
              */
             if (statusCode != HttpStatus.SC_OK){
                 log.error("请求出错：" + getMethod.getStatusLine());
+                log.error("出错url为：" + url);
             }
 
             /**

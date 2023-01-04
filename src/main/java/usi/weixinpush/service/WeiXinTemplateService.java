@@ -151,21 +151,21 @@ public class WeiXinTemplateService {
         while(res==null){
             res = HttpClientUtil.doGet(tu_url,"UTF-8");
         }
-        JSONObject jsonObject = null;
-        try {
-            log.info("获取每日英语 返回数据：[{}]",res);
-            jsonObject = JSON.parseObject(res);
-            String zh = JSON.parseObject(jsonObject.getString("data")).getString("zh");
-            String en = JSON.parseObject(jsonObject.getString("data")).getString("en");
-//        String zh = res.replaceAll(".*\"zh\":\"(.*?)\".*","$1")
-//        String en = res.replaceAll(".*\"en\":\"(.*?)\".*","$1")
-//        log.info("获取笑话 返回数据：[{}]",onlyJok);
-            return zh+"\n"+en;
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("获取每日英语 请求出错");
-        }
-        return "";
+//        JSONObject jsonObject = null;
+//        try {
+//            log.info("获取每日英语 返回数据：[{}]",res);
+//            jsonObject = JSON.parseObject(res);
+//            String zh = JSON.parseObject(jsonObject.getString("data")).getString("zh");
+//            String en = JSON.parseObject(jsonObject.getString("data")).getString("en");
+////        String zh = res.replaceAll(".*\"zh\":\"(.*?)\".*","$1")
+////        String en = res.replaceAll(".*\"en\":\"(.*?)\".*","$1")
+////        log.info("获取笑话 返回数据：[{}]",onlyJok);
+//            return zh+"\n"+en;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.error("获取每日英语 请求出错");
+//        }
+        return res;
     }
 
     /**
