@@ -145,12 +145,18 @@ public class WeiXinTemplateService {
         while(res==null){
             res = HttpClientUtil.doGet(tu_url,"UTF-8");
         }
-        JSONObject jsonObject = JSON.parseObject(res);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = JSON.parseObject(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String zh = JSON.parseObject(jsonObject.getString("data")).getString("zh");
         String en = JSON.parseObject(jsonObject.getString("data")).getString("en");
 //        String zh = res.replaceAll(".*\"zh\":\"(.*?)\".*","$1")
 //        String en = res.replaceAll(".*\"en\":\"(.*?)\".*","$1")
 //        log.info("获取笑话 返回数据：[{}]",onlyJok);
+        log.info("获取每日英语 返回数据：[{}]",zh+"\n"+en);
         return zh+"\n"+en;
     }
 
