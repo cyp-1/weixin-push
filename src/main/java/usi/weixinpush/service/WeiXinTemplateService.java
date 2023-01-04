@@ -127,13 +127,19 @@ public class WeiXinTemplateService {
         String tu_url = "https://api.vvhan.com/api/joke?type=json";
         String res = null;
         String onlyJok = "";
-        while(res==null && onlyJok.length()<260){
-            res = HttpClientUtil.doGet(tu_url,"UTF-8");
-            onlyJok = res.replaceAll(".*\"joke\":\"(.*)\".*","$1");
-        }
-        log.info("获取笑话 返回数据：[{}]",onlyJok);
+        try {
+            while(res==null && onlyJok.length()<260){
+                res = HttpClientUtil.doGet(tu_url,"UTF-8");
+                onlyJok = res.replaceAll(".*\"joke\":\"(.*)\".*","$1");
+            }
+            log.info("获取笑话 返回数据：[{}]",onlyJok);
 
-        return onlyJok;
+            return onlyJok;
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("获取笑话 请求出错");
+        }
+        return "";
     }
 
     /**
@@ -157,6 +163,7 @@ public class WeiXinTemplateService {
             return zh+"\n"+en;
         } catch (Exception e) {
             e.printStackTrace();
+            log.error("获取每日英语 请求出错");
         }
         return "";
     }
