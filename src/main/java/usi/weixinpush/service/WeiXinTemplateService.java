@@ -149,15 +149,16 @@ public class WeiXinTemplateService {
         try {
             log.info("获取每日英语 返回数据：[{}]",res);
             jsonObject = JSON.parseObject(res);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String zh = JSON.parseObject(jsonObject.getString("data")).getString("zh");
-        String en = JSON.parseObject(jsonObject.getString("data")).getString("en");
+            String zh = JSON.parseObject(jsonObject.getString("data")).getString("zh");
+            String en = JSON.parseObject(jsonObject.getString("data")).getString("en");
 //        String zh = res.replaceAll(".*\"zh\":\"(.*?)\".*","$1")
 //        String en = res.replaceAll(".*\"en\":\"(.*?)\".*","$1")
 //        log.info("获取笑话 返回数据：[{}]",onlyJok);
-        return zh+"\n"+en;
+            return zh+"\n"+en;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     /**
