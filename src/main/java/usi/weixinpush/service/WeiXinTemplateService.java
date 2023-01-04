@@ -53,9 +53,7 @@ public class WeiXinTemplateService {
      * @Return void
      */
     public static void pushWeiXinTemplate(){
-        String accessTokenUrl = PUSH_TEMPLATE_URL + getAccessToken();
         JSONObject json = new JSONObject();
-
         // 内容
         JSONObject data = new JSONObject();
         data.put("today",getJSON(CommonnUtil.getNow(),"#E9FB8A"));
@@ -98,6 +96,8 @@ public class WeiXinTemplateService {
             e.printStackTrace();
         }
         json.put("data",data);
+        // 获取access_token
+        String accessTokenUrl = PUSH_TEMPLATE_URL + getAccessToken();
         // 接收用户的OPENID
         for (String toUser : TO_USER){
             json.put("touser",toUser);
@@ -147,6 +147,7 @@ public class WeiXinTemplateService {
         }
         JSONObject jsonObject = null;
         try {
+            log.info("获取每日英语 返回数据：[{}]",res);
             jsonObject = JSON.parseObject(res);
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,7 +157,6 @@ public class WeiXinTemplateService {
 //        String zh = res.replaceAll(".*\"zh\":\"(.*?)\".*","$1")
 //        String en = res.replaceAll(".*\"en\":\"(.*?)\".*","$1")
 //        log.info("获取笑话 返回数据：[{}]",onlyJok);
-        log.info("获取每日英语 返回数据：[{}]",zh+"\n"+en);
         return zh+"\n"+en;
     }
 
